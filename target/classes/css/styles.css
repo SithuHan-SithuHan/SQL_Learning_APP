@@ -446,3 +446,39 @@
     -fx-border-color: #3498db;
     -fx-border-width: 1;
 }
+
+.code-editor-container {
+    -fx-background-color: #2b2b2b;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #3d3d3d;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+}
+
+.editor-header {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0 5 0;
+}
+
+.primary-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.success-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.warning-button {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+}
+
+.status-bar {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1 0 0 0;
+}
