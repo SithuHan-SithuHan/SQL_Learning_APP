@@ -5,41 +5,70 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.coffee_and_code.sql_learning.controller.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.coffee_and_code.sql_learning.controller.MainController"
+            styleClass="border-pane">
+
+   <!-- Top Menu Bar -->
    <top>
-      <VBox>
-         <MenuBar>
+      <VBox styleClass="menu-container">
+         <MenuBar fx:id="menuBar">
             <menus>
                <Menu text="File">
                   <items>
-                     <MenuItem text="New Query" />
-                     <MenuItem text="Open Query" />
-                     <MenuItem text="Save Query" />
+                     <MenuItem text="New Query" fx:id="newQueryMenuItem" />
+                     <MenuItem text="Open Query" fx:id="openQueryMenuItem" />
+                     <MenuItem text="Save Query" fx:id="saveQueryMenuItem" />
                      <SeparatorMenuItem />
-                     <MenuItem text="Exit" />
+                     <MenuItem text="Export Progress" fx:id="exportProgressMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Exit" fx:id="exitMenuItem" />
                   </items>
                </Menu>
                <Menu text="Edit">
                   <items>
-                     <MenuItem text="Undo" />
-                     <MenuItem text="Redo" />
+                     <MenuItem text="Undo" fx:id="undoMenuItem" />
+                     <MenuItem text="Redo" fx:id="redoMenuItem" />
                      <SeparatorMenuItem />
-                     <MenuItem text="Cut" />
-                     <MenuItem text="Copy" />
-                     <MenuItem text="Paste" />
+                     <MenuItem text="Cut" fx:id="cutMenuItem" />
+                     <MenuItem text="Copy" fx:id="copyMenuItem" />
+                     <MenuItem text="Paste" fx:id="pasteMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Find" fx:id="findMenuItem" />
+                     <MenuItem text="Replace" fx:id="replaceMenuItem" />
                   </items>
                </Menu>
                <Menu text="View">
                   <items>
-                     <MenuItem text="Database Browser" />
-                     <MenuItem text="Full Screen" />
+                     <MenuItem text="Database Browser" fx:id="dbBrowserMenuItem" />
+                     <MenuItem text="Query History" fx:id="queryHistoryMenuItem" />
+                     <CheckMenuItem text="Show Line Numbers" fx:id="lineNumbersMenuItem" />
+                     <CheckMenuItem text="Word Wrap" fx:id="wordWrapMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Zoom In" fx:id="zoomInMenuItem" />
+                     <MenuItem text="Zoom Out" fx:id="zoomOutMenuItem" />
+                     <MenuItem text="Reset Zoom" fx:id="resetZoomMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Full Screen" fx:id="fullScreenMenuItem" />
+                  </items>
+               </Menu>
+               <Menu text="Tools">
+                  <items>
+                     <MenuItem text="SQL Formatter" fx:id="formatMenuItem" />
+                     <MenuItem text="Query Analyzer" fx:id="analyzeMenuItem" />
+                     <MenuItem text="Performance Tips" fx:id="performanceMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Settings" fx:id="settingsMenuItem" />
                   </items>
                </Menu>
                <Menu text="Help">
                   <items>
-                     <MenuItem text="About" />
-                     <MenuItem text="Documentation" />
+                     <MenuItem text="Getting Started" fx:id="gettingStartedMenuItem" />
+                     <MenuItem text="SQL Reference" fx:id="sqlReferenceMenuItem" />
+                     <MenuItem text="Keyboard Shortcuts" fx:id="shortcutsMenuItem" />
+                     <SeparatorMenuItem />
+                     <MenuItem text="Check for Updates" fx:id="updatesMenuItem" />
+                     <MenuItem text="About" fx:id="aboutMenuItem" />
                   </items>
                </Menu>
             </menus>
@@ -47,110 +76,281 @@
       </VBox>
    </top>
 
+   <!-- Main Content Area -->
    <center>
       <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
          <tabs>
+
             <!-- Learning Tab -->
-            <Tab fx:id="learningTab" text="Learning">
-               <HBox>
-                  <VBox minWidth="250" maxWidth="300" spacing="10">
-                     <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                     <Label styleClass="section-header" text="Learning Topics"/>
-                     <TreeView fx:id="topicsTreeView" VBox.vgrow="ALWAYS"/>
-                     <HBox spacing="10" alignment="CENTER">
-                        <Button fx:id="prevTopicBtn" text="Previous"/>
-                        <Button fx:id="nextTopicBtn" text="Next"/>
-                     </HBox>
-                     <ProgressBar fx:id="learningProgressBar" maxWidth="Infinity"/>
-                     <Label fx:id="progressLabel" text="Topic 1 of 25"/>
+            <Tab fx:id="learningTab" text="📚 Learning">
+               <HBox spacing="16">
+                  <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+                  <!-- Left Sidebar -->
+                  <VBox styleClass="sidebar-card" minWidth="300" maxWidth="350" spacing="16">
+                     <!-- Learning Topics Section -->
+                     <VBox spacing="12">
+                        <Label styleClass="section-header" text="Learning Topics"/>
+                        <TreeView fx:id="topicsTreeView" VBox.vgrow="ALWAYS" prefHeight="400"/>
+                     </VBox>
+
+                     <!-- Progress Section -->
+                     <VBox spacing="12">
+                        <Label styleClass="subsection-header" text="Your Progress"/>
+                        <VBox spacing="8">
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <Label text="Overall Progress:" styleClass="label"/>
+                              <Label fx:id="overallProgressLabel" text="0%" styleClass="label"/>
+                           </HBox>
+                           <ProgressBar fx:id="learningProgressBar" maxWidth="Infinity" prefHeight="8"/>
+                           <Label fx:id="progressLabel" text="Topic 1 of 25" styleClass="label"/>
+                        </VBox>
+                     </VBox>
+
+                     <!-- Navigation Controls -->
+                     <VBox spacing="12">
+                        <Label styleClass="subsection-header" text="Navigation"/>
+                        <HBox spacing="12" alignment="CENTER">
+                           <Button fx:id="prevTopicBtn" text="← Previous" styleClass="secondary"/>
+                           <Button fx:id="nextTopicBtn" text="Next →"/>
+                        </HBox>
+                        <HBox spacing="8" alignment="CENTER">
+                           <Button fx:id="bookmarkBtn" text="Bookmark" styleClass="icon-button"/>
+                           <Button fx:id="noteBtn" text="Add Note" styleClass="icon-button"/>
+                           <Button fx:id="shareBtn" text="Share" styleClass="icon-button"/>
+                        </HBox>
+                     </VBox>
                   </VBox>
 
-                  <VBox HBox.hgrow="ALWAYS" spacing="10">
-                     <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                     <WebView fx:id="contentWebView" VBox.vgrow="ALWAYS"/>
+                  <!-- Main Content Area -->
+                  <VBox HBox.hgrow="ALWAYS" spacing="16" styleClass="card">
+                     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                     <!-- Content Header -->
+                     <HBox alignment="CENTER_LEFT" spacing="16">
+                        <Label fx:id="topicTitleLabel" text="Introduction to SQL" styleClass="section-header"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="searchBtn" text="🔍 Search" styleClass="icon-button"/>
+                        <Button fx:id="printBtn" text="🖨️ Print" styleClass="icon-button"/>
+                     </HBox>
+
+                     <!-- Content Display -->
+                     <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane">
+                        <WebView fx:id="contentWebView" prefHeight="600"/>
+                     </ScrollPane>
                   </VBox>
                </HBox>
             </Tab>
 
-            <!-- Practice Tab -->
-            <Tab fx:id="practiceTab" text="Practice">
-               <VBox>
-                  <HBox VBox.vgrow="ALWAYS">
-                     <!-- Left Panel - Questions List -->
-                     <VBox minWidth="200" maxWidth="250" spacing="10">
-                        <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                        <Label styleClass="section-header" text="Practice Questions"/>
-                        <ListView fx:id="questionsList" VBox.vgrow="ALWAYS"/>
-                        <ProgressBar fx:id="practiceProgressBar" maxWidth="Infinity"/>
-                        <Label fx:id = "progressStatusLabel" text="Progress: 0/12 completed"/>
+            <!-- Practice Tab - REDESIGNED -->
+            <Tab fx:id="practiceTab" text="💻 Practice">
+               <HBox spacing="16">
+                  <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+                  <!-- REDUCED Left Sidebar - 20% smaller -->
+                  <VBox styleClass="sidebar-card" minWidth="200" maxWidth="240" spacing="12">
+                     <!-- Difficulty Filter - More Compact -->
+                     <VBox spacing="8">
+                        <Label styleClass="subsection-header" text="Filter by Level"/>
+                        <VBox spacing="6">
+                           <RadioButton fx:id="allLevelsRadio" text="All Levels" selected="true" styleClass="compact-radio"/>
+                           <RadioButton fx:id="easyRadio" text="🟢 Easy" styleClass="compact-radio"/>
+                           <RadioButton fx:id="mediumRadio" text="🟡 Medium" styleClass="compact-radio"/>
+                           <RadioButton fx:id="hardRadio" text="🔴 Hard" styleClass="compact-radio"/>
+                           <RadioButton fx:id="proRadio" text="⭐ Pro" styleClass="compact-radio"/>
+                        </VBox>
                      </VBox>
 
-                     <!-- Center Panel - SQL Editor -->
-                     <VBox HBox.hgrow="ALWAYS" spacing="10">
-                        <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                        <Label fx:id="questionTitleLabel" styleClass="question-title"
-                               text="Select a question to begin"/>
-                        <WebView fx:id="questionContentWebView" minHeight="150" maxHeight="200"/>
+                     <!-- Questions List - More Compact -->
+                     <VBox spacing="8" VBox.vgrow="ALWAYS">
+                        <Label styleClass="subsection-header" text="Questions"/>
+                        <ListView fx:id="questionsList" VBox.vgrow="ALWAYS" prefHeight="200"/>
+                     </VBox>
 
-                        <VBox VBox.vgrow="ALWAYS">
-                           <Label text="SQL Editor" styleClass="editor-header"/>
-                           <VBox fx:id="sqlEditorContainer" VBox.vgrow="ALWAYS"
-                                 styleClass="code-editor-container" minHeight="200"/>
+                     <!-- Compact Progress -->
+                     <VBox spacing="8">
+                        <Label styleClass="subsection-header" text="Progress"/>
+                        <VBox spacing="6">
+                           <HBox alignment="CENTER_LEFT" spacing="8">
+                              <Label text="Done:" styleClass="compact-label"/>
+                              <Label fx:id="practiceProgressLabel" text="0/12" styleClass="compact-label"/>
+                           </HBox>
+                           <ProgressBar fx:id="practiceProgressBar" maxWidth="Infinity" prefHeight="6"/>
                         </VBox>
+                     </VBox>
 
-                        <HBox spacing="10" alignment="CENTER_LEFT">
-                           <Button fx:id="executeBtn" text="Execute" styleClass="primary-button"/>
-                           <Button fx:id="validateBtn" text="Validate"/>
-                           <Button fx:id="resetBtn" text="Reset DB" styleClass="warning-button"/>
+                     <!-- Compact Statistics -->
+                     <VBox spacing="8">
+                        <Label styleClass="subsection-header" text="Stats"/>
+                        <VBox spacing="4">
+                           <HBox alignment="CENTER_LEFT" spacing="8">
+                              <Label text="Success:" styleClass="compact-label"/>
+                              <Label fx:id="successRateLabel" text="0%" styleClass="compact-label"/>
+                           </HBox>
+                           <HBox alignment="CENTER_LEFT" spacing="8">
+                              <Label text="Streak:" styleClass="compact-label"/>
+                              <Label fx:id="bestStreakLabel" text="0" styleClass="compact-label"/>
+                           </HBox>
+                        </VBox>
+                     </VBox>
+                  </VBox>
+
+                  <!-- EXPANDED Main Practice Area - More Space -->
+                  <VBox HBox.hgrow="ALWAYS" spacing="16">
+
+                     <!-- ENHANCED Question Display Area -->
+                     <VBox styleClass="card" spacing="16" VBox.vgrow="SOMETIMES" minHeight="300">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                        <!-- Question Header -->
+                        <HBox alignment="CENTER_LEFT" spacing="16">
+                           <Label fx:id="currentQuestionLabel" text="Question 1 of 12" styleClass="section-header"/>
+                           <Label fx:id="difficultyLabel" text="🟢 Easy" styleClass="difficulty-badge"/>
                            <Region HBox.hgrow="ALWAYS"/>
-                           <Button fx:id="submitBtn" text="Submit Answer"
-                                   styleClass="success-button"/>
+                           <Button fx:id="hintBtn" text="💡 Hint" styleClass="warning"/>
+                           <Button fx:id="solutionBtn" text="✨ Solution" styleClass="secondary"/>
                         </HBox>
 
-                        <!-- Results Section -->
-                        <VBox VBox.vgrow="ALWAYS" minHeight="200">
-                           <TabPane>
-                              <tabs>
-                                 <Tab text="Results">
-                                    <TableView fx:id="resultTable" VBox.vgrow="ALWAYS"/>
-                                 </Tab>
-                                 <Tab text="Output">
-                                    <TextArea fx:id="outputTextArea" editable="false"
-                                              wrapText="true"/>
-                                 </Tab>
-                              </tabs>
-                           </TabPane>
+                        <!-- Question Title -->
+                        <Label fx:id="questionTitleLabel" text="Select all employees from the HR department" styleClass="question-title-large"/>
+
+                        <!-- IMPROVED Question Description with Better Formatting -->
+                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" minHeight="200" styleClass="question-scroll">
+                           <VBox spacing="12">
+                              <WebView fx:id="questionDescriptionWebView" prefHeight="300" VBox.vgrow="ALWAYS"/>
+                              <!-- Additional space for table schemas, examples, etc. -->
+                           </VBox>
+                        </ScrollPane>
+
+                        <!-- Quick Action Buttons -->
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                           <Button fx:id="showTablesBtn" text="📊 Show Tables" styleClass="info-button"/>
+                           <Button fx:id="sampleDataBtn" text="🎲 Sample Data" styleClass="info-button"/>
+                           <Button fx:id="resetQuestionBtn" text="🔄 Reset" styleClass="secondary"/>
+                        </HBox>
+                     </VBox>
+
+                     <!-- SQL Editor Area - Unchanged -->
+                     <VBox styleClass="code-editor-panel" spacing="0" VBox.vgrow="ALWAYS">
+                        <!-- Editor Toolbar -->
+                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="padding-medium">
+                           <Label text="SQL Editor" styleClass="subsection-header"/>
+                           <Region HBox.hgrow="ALWAYS"/>
+                           <Button fx:id="formatCodeBtn" text="Format" styleClass="icon-button"/>
+                           <Button fx:id="clearCodeBtn" text="Clear" styleClass="icon-button"/>
+                           <Separator orientation="VERTICAL"/>
+                           <Button fx:id="executeBtn" text="▶ Execute" styleClass="success"/>
+                           <Button fx:id="validateBtn" text="✓ Validate" styleClass="secondary"/>
+                        </HBox>
+
+                        <!-- Code Editor -->
+                        <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane">
+                           <TextArea fx:id="sqlEditor"
+                                     promptText="-- Write your SQL query here&#10;SELECT * FROM employees WHERE department = 'HR';"
+                                     prefRowCount="8"
+                                     wrapText="false"/>
+                        </ScrollPane>
+                     </VBox>
+
+                     <!-- Results Area - Unchanged -->
+                     <VBox styleClass="results-panel" spacing="0" minHeight="180" VBox.vgrow="SOMETIMES">
+                        <!-- Results Toolbar -->
+                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="padding-medium">
+                           <Label text="Query Results" styleClass="subsection-header"/>
+                           <Region HBox.hgrow="ALWAYS"/>
+                           <Label fx:id="executionTimeLabel" text="Execution time: 0ms" styleClass="label"/>
+                           <Button fx:id="exportResultsBtn" text="Export" styleClass="icon-button"/>
+                        </HBox>
+
+                        <!-- Results Display -->
+                        <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+                           <TableView fx:id="resultsTable" prefHeight="120"/>
+                        </ScrollPane>
+                     </VBox>
+                  </VBox>
+               </HBox>
+            </Tab>
+
+            <!-- Database Explorer Tab -->
+            <Tab fx:id="explorerTab" text="🗂️ Explorer">
+               <VBox spacing="16" styleClass="card">
+                  <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                  <Label text="Database Explorer" styleClass="section-header"/>
+                  <Label text="Browse and manage your databases, tables, and data" styleClass="label"/>
+
+                  <!-- Database Schema Browser (moved here from Practice tab) -->
+                  <HBox spacing="16" VBox.vgrow="ALWAYS">
+                     <VBox spacing="12" minWidth="300">
+                        <Label text="Database Schema" styleClass="subsection-header"/>
+                        <TreeView fx:id="schemaTreeView" VBox.vgrow="ALWAYS"/>
+                        <HBox spacing="8">
+                           <Button fx:id="showTableBtn" text="👁️ View Table" styleClass="secondary"/>
+                           <Button fx:id="describeTableBtn" text="📝 Describe" styleClass="secondary"/>
+                        </HBox>
+                     </VBox>
+
+                     <VBox HBox.hgrow="ALWAYS" spacing="12">
+                        <Label text="Table Details" styleClass="subsection-header"/>
+                        <TableView fx:id="tableDetailsView" VBox.vgrow="ALWAYS"/>
+                     </VBox>
+                  </HBox>
+               </VBox>
+            </Tab>
+
+            <!-- Analytics Tab -->
+            <Tab fx:id="analyticsTab" text="📊 Analytics">
+               <VBox spacing="16" styleClass="card">
+                  <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                  <Label text="Learning Analytics" styleClass="section-header"/>
+                  <Label text="Track your learning progress, performance metrics, and achievements" styleClass="label"/>
+
+                  <!-- Statistics Grid -->
+                  <GridPane hgap="16" vgap="16" VBox.vgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                     </columnConstraints>
+
+                     <VBox styleClass="card" spacing="12" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                        <Label text="Practice Statistics" styleClass="subsection-header"/>
+                        <VBox spacing="8">
+                           <HBox alignment="CENTER_LEFT" spacing="8">
+                              <Label text="Total Queries:" styleClass="label"/>
+                              <Label fx:id="totalQueriesLabel" text="0" styleClass="label"/>
+                           </HBox>
+                           <HBox alignment="CENTER_LEFT" spacing="8">
+                              <Label text="Success Rate:" styleClass="label"/>
+                              <Label fx:id="analyticsSuccessRateLabel" text="0%" styleClass="label"/>
+                           </HBox>
                         </VBox>
                      </VBox>
 
-                     <!-- Right Panel - Database Browser -->
-                     <VBox minWidth="250" maxWidth="300" spacing="10">
-                        <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                        <Label styleClass="section-header" text="Database Browser"/>
-                        <Label text="Tables"/>
-                        <ListView fx:id="tablesListView" VBox.vgrow="ALWAYS"/>
-                        <Label text="Table Structure"/>
-                        <TableView fx:id="tableStructureView" VBox.vgrow="ALWAYS">
-                           <columns>
-                              <TableColumn fx:id="columnNameCol" text="Column Name"/>
-                              <TableColumn fx:id="columnTypeCol" text="Type"/>
-                              <TableColumn fx:id="columnSizeCol" text="Size"/>
-                              <TableColumn fx:id="columnNullableCol" text="Nullable"/>
-                           </columns>
-                        </TableView>
+                     <VBox styleClass="card" spacing="12" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                        <Label text="Learning Progress" styleClass="subsection-header"/>
+                        <VBox spacing="8">
+                           <Label text="Topics Completed" styleClass="label"/>
+                           <ProgressBar fx:id="analyticsLearningProgressBar" maxWidth="Infinity"/>
+                        </VBox>
                      </VBox>
-                  </HBox>
-
-                  <!-- Status Bar -->
-                  <HBox spacing="10" styleClass="status-bar">
-                     <padding><Insets top="5" right="10" bottom="5" left="10"/></padding>
-                     <Label fx:id="statusLabel" text="Ready"/>
-                     <Region HBox.hgrow="ALWAYS"/>
-                     <Label text="SQL Learning App v1.0"/>
-                  </HBox>
+                  </GridPane>
                </VBox>
             </Tab>
          </tabs>
       </TabPane>
    </center>
+
+   <!-- Status Bar -->
+   <bottom>
+      <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="16">
+         <Label fx:id="statusLabel" text="Ready"/>
+         <Region HBox.hgrow="ALWAYS"/>
+         <Label fx:id="connectionStatusLabel" text="Database: Connected"/>
+         <Separator orientation="VERTICAL"/>
+         <Label fx:id="userProgressStatusLabel" text="Progress: 0%"/>
+         <Separator orientation="VERTICAL"/>
+         <Label fx:id="timeLabel" text="00:00"/>
+      </HBox>
+   </bottom>
 </BorderPane>

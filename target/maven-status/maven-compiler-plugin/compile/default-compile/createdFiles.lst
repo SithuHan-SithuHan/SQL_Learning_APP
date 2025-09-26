@@ -1,10 +1,12 @@
 com/coffee_and_code/sql_learning/service/DatabaseService.class
+com/coffee_and_code/sql_learning/controller/MainController$2.class
 com/coffee_and_code/sql_learning/service/DatabaseService$ColumnInfo.class
 com/coffee_and_code/sql_learning/service/DatabaseService$ExecutionResult.class
 com/coffee_and_code/sql_learning/service/SqlSyntaxHighlighter.class
 com/coffee_and_code/sql_learning/service/PracticeService.class
 com/coffee_and_code/sql_learning/service/PracticeService$PracticeQuestion.class
 com/coffee_and_code/sql_learning/SQLLearningApp.class
+com/coffee_and_code/sql_learning/utils/IconGenerator.class
 com/coffee_and_code/sql_learning/service/DatabaseService$ValidationResult.class
 com/coffee_and_code/sql_learning/service/LearningContentService.class
 com/coffee_and_code/sql_learning/service/DatabaseService$QueryResult.class
