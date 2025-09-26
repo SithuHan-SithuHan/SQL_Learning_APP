@@ -214,13 +214,11 @@
                         <!-- Question Title -->
                         <Label fx:id="questionTitleLabel" text="Select all employees from the HR department" styleClass="question-title-large"/>
 
-                        <!-- IMPROVED Question Description with Better Formatting -->
-                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" minHeight="200" styleClass="question-scroll">
-                           <VBox spacing="12">
-                              <WebView fx:id="questionDescriptionWebView" prefHeight="300" VBox.vgrow="ALWAYS"/>
-                              <!-- Additional space for table schemas, examples, etc. -->
-                           </VBox>
-                        </ScrollPane>
+                        <!-- FIXED Question Description with WebView -->
+                        <VBox VBox.vgrow="ALWAYS" minHeight="250">
+                           <Label text="Question Description:" styleClass="subsection-header"/>
+                           <WebView fx:id="questionDescriptionWebView" prefHeight="200" VBox.vgrow="ALWAYS"/>
+                        </VBox>
 
                         <!-- Quick Action Buttons -->
                         <HBox spacing="12" alignment="CENTER_LEFT">

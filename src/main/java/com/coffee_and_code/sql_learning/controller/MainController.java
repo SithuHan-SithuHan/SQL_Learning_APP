@@ -97,7 +97,7 @@ public class MainController implements Initializable {
 
     // Questions and content
     @FXML private ListView<String> questionsList;
-    @FXML private Label currentQuestionLabel;
+    @FXML private WebView questionDescriptionWebView;
     @FXML private Label difficultyLabel;
     @FXML private Label questionTitleLabel;
     @FXML private Label questionDescriptionLabel;
@@ -134,6 +134,9 @@ public class MainController implements Initializable {
     @FXML private Label connectionStatusLabel;
     @FXML private Label userProgressStatusLabel;
     @FXML private Label timeLabel;
+
+    @FXML private Label currentQuestionLabel;
+
 
     // ===== SERVICES =====
     private DatabaseService databaseService;
@@ -456,32 +459,14 @@ public class MainController implements Initializable {
                 question.getDifficulty().substring(1));
         questionTitleLabel.setText(question.getTitle());
 
-        // Load HTML content in a WebView for better formatting
-        // Check if we have a WebView for question description
-        WebView questionWebView = createQuestionWebView();
-
-        // Replace the label with WebView for rich HTML content
-        String htmlContent = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body { 
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                    margin: 0; 
-                    padding: 0;
-                    background-color: white;
-                    color: #0f172a;
-                }
-            </style>
-        </head>
-        <body>
-        %s
-        </body>
-        </html>
-        """.formatted(question.getDescription());
-
-        questionWebView.getEngine().loadContent(htmlContent, "text/html");
+        // Load question description in WebView for HTML rendering
+        if (questionDescriptionWebView != null) {
+            String htmlContent = createQuestionHTML(question.getDescription());
+            questionDescriptionWebView.getEngine().loadContent(htmlContent, "text/html");
+            logger.info("Loaded question description in WebView");
+        } else {
+            logger.warn("questionDescriptionWebView is null");
+        }
 
         // Clear previous results
         resultsTable.getColumns().clear();
@@ -498,13 +483,91 @@ public class MainController implements Initializable {
         }
     }
 
-
-    private WebView createQuestionWebView() {
-        WebView webView = new WebView();
-        webView.setPrefHeight(300);
-        webView.setMaxHeight(Double.MAX_VALUE);
-        return webView;
+    // Add this helper method to create properly formatted HTML:
+    private String createQuestionHTML(String content) {
+        return """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body { 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    margin: 0; 
+                    padding: 16px;
+                    background-color: white;
+                    color: #0f172a;
+                    line-height: 1.6;
+                    font-size: 14px;
+                }
+                h3 { color: #2563eb; margin-bottom: 16px; font-size: 18px; }
+                h4 { color: #059669; margin-top: 24px; margin-bottom: 12px; font-size: 16px; }
+                h5 { color: #d97706; margin-top: 16px; margin-bottom: 8px; font-size: 14px; }
+                p { margin-bottom: 12px; }
+                code { 
+                    background-color: #f1f5f9; 
+                    padding: 2px 6px; 
+                    border-radius: 4px; 
+                    font-family: 'Monaco', 'Consolas', monospace;
+                    font-size: 13px;
+                }
+                table { 
+                    border-collapse: collapse; 
+                    width: 100%; 
+                    margin: 16px 0; 
+                    border: 2px solid #e2e8f0;
+                    font-size: 13px;
+                }
+                th { 
+                    background-color: #f8fafc; 
+                    border: 1px solid #cbd5e1; 
+                    padding: 10px; 
+                    text-align: left; 
+                    font-weight: 600;
+                }
+                td { 
+                    border: 1px solid #cbd5e1; 
+                    padding: 8px;
+                }
+                tr:nth-child(even) { 
+                    background-color: #f8fafc;
+                }
+                .info-box {
+                    background-color: #f0f9ff;
+                    padding: 16px;
+                    border-left: 4px solid #2563eb;
+                    margin: 16px 0;
+                    border-radius: 4px;
+                }
+                .info-box h5 {
+                    color: #1e40af;
+                    margin-bottom: 8px;
+                    margin-top: 0;
+                }
+                ul {
+                    margin: 8px 0;
+                    padding-left: 20px;
+                }
+                li {
+                    margin-bottom: 4px;
+                }
+                em {
+                    color: #6b7280;
+                    font-style: italic;
+                }
+                strong {
+                    font-weight: 600;
+                    color: #374151;
+                }
+            </style>
+        </head>
+        <body>
+        %s
+        </body>
+        </html>
+        """.formatted(content);
     }
+
 
     // ===== SQL EXECUTION METHODS =====
 

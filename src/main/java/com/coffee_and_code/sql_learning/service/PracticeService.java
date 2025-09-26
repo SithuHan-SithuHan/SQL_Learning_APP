@@ -346,152 +346,65 @@ public class PracticeService {
         return new PracticeQuestion(
                 "Easy-175",
                 "Combine Two Tables",
-                // Enhanced HTML-formatted description
+                // Simplified but well-structured content
                 """
                 <div style='font-family: Arial, sans-serif; padding: 20px; line-height: 1.6;'>
-                    <h3 style='color: #2563eb; margin-bottom: 20px;'>Problem Description</h3>
+                    <h3>Problem Description</h3>
                     <p>Write a solution to report the <strong>first name</strong>, <strong>last name</strong>, <strong>city</strong>, and <strong>state</strong> of each person in the Person table.</p>
-                    <p>If the address of a personId is not present in the Address table, report <code>null</code> instead.</p>
+                    <p>If the address of a personId is not present in the Address table, report <em>null</em> instead.</p>
                     
-                    <h4 style='color: #059669; margin-top: 30px; margin-bottom: 15px;'>📊 Table: Person</h4>
-                    <table style='border-collapse: collapse; width: 100%; margin-bottom: 20px; border: 2px solid #e2e8f0;'>
-                        <thead>
-                            <tr style='background-color: #f8fafc;'>
-                                <th style='border: 1px solid #cbd5e1; padding: 12px; text-align: left; font-weight: 600;'>Column Name</th>
-                                <th style='border: 1px solid #cbd5e1; padding: 12px; text-align: left; font-weight: 600;'>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>personId</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>int</td>
-                            </tr>
-                            <tr style='background-color: #f8fafc;'>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>lastName</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>varchar</td>
-                            </tr>
-                            <tr>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>firstName</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>varchar</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><small><em>personId is the primary key (column with unique values) for this table.</em></small></p>
+                    <h4>Table Schemas</h4>
                     
-                    <h4 style='color: #059669; margin-top: 30px; margin-bottom: 15px;'>📊 Table: Address</h4>
-                    <table style='border-collapse: collapse; width: 100%; margin-bottom: 20px; border: 2px solid #e2e8f0;'>
-                        <thead>
-                            <tr style='background-color: #f8fafc;'>
-                                <th style='border: 1px solid #cbd5e1; padding: 12px; text-align: left; font-weight: 600;'>Column Name</th>
-                                <th style='border: 1px solid #cbd5e1; padding: 12px; text-align: left; font-weight: 600;'>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>addressId</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>int</td>
-                            </tr>
-                            <tr style='background-color: #f8fafc;'>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>personId</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>int</td>
-                            </tr>
-                            <tr>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>city</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>varchar</td>
-                            </tr>
-                            <tr style='background-color: #f8fafc;'>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'><code>state</code></td>
-                                <td style='border: 1px solid #cbd5e1; padding: 10px;'>varchar</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><small><em>addressId is the primary key (column with unique values) for this table.</em></small></p>
-                    
-                    <h4 style='color: #d97706; margin-top: 30px; margin-bottom: 15px;'>📝 Example</h4>
-                    
-                    <h5 style='margin-bottom: 10px;'>Input - Person table:</h5>
-                    <table style='border-collapse: collapse; width: 100%; margin-bottom: 15px; border: 2px solid #fbbf24;'>
-                        <thead>
-                            <tr style='background-color: #fef3c7;'>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>personId</th>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>lastName</th>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>firstName</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>1</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>Wang</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>Allen</td>
-                            </tr>
-                            <tr style='background-color: #fef3c7;'>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>2</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>Alice</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>Bob</td>
-                            </tr>
-                        </tbody>
+                    <p><strong>Person Table:</strong></p>
+                    <table border="1" style="border-collapse: collapse; margin: 10px 0;">
+                        <tr style="background-color: #f0f0f0;">
+                            <th style="padding: 8px;">Column</th>
+                            <th style="padding: 8px;">Type</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">personId</td>
+                            <td style="padding: 6px;">int</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">lastName</td>
+                            <td style="padding: 6px;">varchar</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">firstName</td>
+                            <td style="padding: 6px;">varchar</td>
+                        </tr>
                     </table>
                     
-                    <h5 style='margin-bottom: 10px;'>Input - Address table:</h5>
-                    <table style='border-collapse: collapse; width: 100%; margin-bottom: 15px; border: 2px solid #fbbf24;'>
-                        <thead>
-                            <tr style='background-color: #fef3c7;'>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>addressId</th>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>personId</th>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>city</th>
-                                <th style='border: 1px solid #f59e0b; padding: 10px; text-align: center;'>state</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>1</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>2</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>New York City</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>New York</td>
-                            </tr>
-                            <tr style='background-color: #fef3c7;'>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>2</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>3</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>Leetcode</td>
-                                <td style='border: 1px solid #f59e0b; padding: 8px; text-align: center;'>California</td>
-                            </tr>
-                        </tbody>
+                    <p><strong>Address Table:</strong></p>
+                    <table border="1" style="border-collapse: collapse; margin: 10px 0;">
+                        <tr style="background-color: #f0f0f0;">
+                            <th style="padding: 8px;">Column</th>
+                            <th style="padding: 8px;">Type</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">addressId</td>
+                            <td style="padding: 6px;">int</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">personId</td>
+                            <td style="padding: 6px;">int</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">city</td>
+                            <td style="padding: 6px;">varchar</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px;">state</td>
+                            <td style="padding: 6px;">varchar</td>
+                        </tr>
                     </table>
                     
-                    <h5 style='margin-bottom: 10px;'>Expected Output:</h5>
-                    <table style='border-collapse: collapse; width: 100%; margin-bottom: 20px; border: 2px solid #10b981;'>
-                        <thead>
-                            <tr style='background-color: #d1fae5;'>
-                                <th style='border: 1px solid #10b981; padding: 10px; text-align: center;'>firstName</th>
-                                <th style='border: 1px solid #10b981; padding: 10px; text-align: center;'>lastName</th>
-                                <th style='border: 1px solid #10b981; padding: 10px; text-align: center;'>city</th>
-                                <th style='border: 1px solid #10b981; padding: 10px; text-align: center;'>state</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>Allen</td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>Wang</td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'><em>null</em></td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'><em>null</em></td>
-                            </tr>
-                            <tr style='background-color: #d1fae5;'>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>Bob</td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>Alice</td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>New York City</td>
-                                <td style='border: 1px solid #10b981; padding: 8px; text-align: center;'>New York</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div style='background-color: #f0f9ff; padding: 15px; border-left: 4px solid #2563eb; margin-top: 20px;'>
-                        <h5 style='color: #1e40af; margin-bottom: 10px;'>💡 Key Concepts:</h5>
-                        <ul style='margin: 0; padding-left: 20px;'>
-                            <li>Use <strong>LEFT JOIN</strong> to include all persons</li>
-                            <li>Join tables using the <code>personId</code> foreign key</li>
-                            <li>Missing addresses will show as <em>null</em> values</li>
-                        </ul>
-                    </div>
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>Use <strong>LEFT JOIN</strong> to include all persons</li>
+                        <li>Join on <strong>personId</strong></li>
+                        <li>Missing addresses will show as null</li>
+                    </ul>
                 </div>
                 """,
                 "-- Write your SQL query here\nSELECT p.firstName, p.lastName, a.city, a.state \nFROM Person p \nLEFT JOIN Address a ON p.personId = a.personId;",
