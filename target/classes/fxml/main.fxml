@@ -82,7 +82,7 @@
                         <Label styleClass="section-header" text="Practice Questions"/>
                         <ListView fx:id="questionsList" VBox.vgrow="ALWAYS"/>
                         <ProgressBar fx:id="practiceProgressBar" maxWidth="Infinity"/>
-                        <Label text="Progress: 0/12 completed"/>
+                        <Label fx:id = "progressStatusLabel" text="Progress: 0/12 completed"/>
                      </VBox>
 
                      <!-- Center Panel - SQL Editor -->

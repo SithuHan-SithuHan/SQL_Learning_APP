@@ -9,3 +9,33 @@ Msrc/main/java/com/coffee_and_code/sql_learning/controller/MainController.java,
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 Ç
 Rsrc/main/java/com/coffee_and_code/sql_learning/service/LearningContentService.java,8/6/8643c6577004d76e2f0763025b2f089bfb2364d9
+F
+sqllearningdb.trace.db,6/0/60ee005327d80e7b424acce9c91d45401b0bb620
+Ä
+Psrc/main/java/com/coffee_and_code/sql_learning/service/SqlSyntaxHighlighter.java,2/0/204bc12fc881b986870d12a921bff74bc07c7547
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
+Å
+Q.idea/sonarlint/securityhotspotstore/f/2/f2024964c4eb6a52ecb918758681f05b77b608e4,3/f/3f59732ab11e91b0206268a87349bbececb688b9
+Å
+Q.idea/sonarlint/securityhotspotstore/6/4/6452900e405073900a65136c22b74df3246c1e72,d/7/d72c1a11b146b5e321d5c849aac2c8478b69f086
+Å
+Q.idea/sonarlint/securityhotspotstore/f/c/fc8272d04e188a358eb7809621ca3e7099b592dc,4/8/485831fea874a044c33efa0b2d5967238137ca25
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
+Å
+Q.idea/sonarlint/securityhotspotstore/8/6/8643c6577004d76e2f0763025b2f089bfb2364d9,7/5/75d2a5835982e411a1db47a130f67b5752235430
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+Å
+Q.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,2/c/2cabb939da04d3de3a200bf2b575690e1a16316d
+D
+SQL Learning APP.iml,2/b/2bf05b600af6e820babd503ca5e616444a220750
+z
+Jsrc/main/java/com/coffee_and_code/sql_learning/service/ResourceLoader.java,3/d/3dc972e0555eac89114d74d0fbb3aeeb5818713d
+w
+G.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,8/6/863e0292fd7e9b3e74dafd6cc01f73ba76346482
+B
+user_progress.json,c/b/cb94e87823214ac0879496110d1ca466b7ec6645
+{
+Ksrc/main/java/com/coffee_and_code/sql_learning/service/PracticeService.java,f/f/ff71200e40850754cff64072ae0271cec2c65ee0

@@ -1,15 +1,19 @@
 
 y
-java:S1192°"VDefine a constant instead of duplicating this literal "-fx-text-fill: green;" 3 times.(éäììùÿÿÿÿ8äâÅü–3
+java:S1192Â"VDefine a constant instead of duplicating this literal "-fx-text-fill: green;" 3 times.(éäììùÿÿÿÿ8è¾à‚—3
 €
-java:S1450N"cRemove the "currentQuestionIndex" field and declare it as a local variable in the relevant methods.( Š­¥8¶ãÅü–3
+java:S1450U"cRemove the "currentQuestionIndex" field and declare it as a local variable in the relevant methods.( Š­¥8º¿à‚—3
 O
-java:S1602¼",Remove useless curly braces around statement(«ŞÇ»øÿÿÿÿ8ÃãÅü–3
+java:S1602Ã",Remove useless curly braces around statement(«ŞÇ»øÿÿÿÿ8È¿à‚—3
 J
-java:S1602",Remove useless curly braces around statement(ÛÛ…á8ÉãÅü–3
+java:S1602 ",Remove useless curly braces around statement(ÛÛ…á8Í¿à‚—3
 O
-java:S1602—",Remove useless curly braces around statement(ßãØàûÿÿÿÿ8ÊãÅü–3
+java:S1602©",Remove useless curly braces around statement(ßãØàûÿÿÿÿ8Î¿à‚—3
+t
+java:S3457ï"Q%n should be used in place of \n to produce the platform-specific line separator.(Ÿˆù­øÿÿÿÿ8Ü¿à‚—3
+Q
+java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8…ªñƒ—3
 U
-java:S1068N"8Remove this unused "currentQuestionIndex" private field.( Š­¥8ƒäÅü–3
+java:S1068U"8Remove this unused "currentQuestionIndex" private field.( Š­¥8á¿à‚—3
 P
-java:S1144¬"-Remove this unused private "showInfo" method.(Ï«Ûâúÿÿÿÿ8…äÅü–3
+java:S1144À"-Remove this unused private "showInfo" method.(Ï«Ûâúÿÿÿÿ8á¿à‚—3

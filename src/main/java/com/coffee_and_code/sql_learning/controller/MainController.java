@@ -60,6 +60,8 @@ public class MainController implements Initializable {
     @FXML private TextArea outputTextArea;
     @FXML private Label statusLabel;
     @FXML private ProgressBar practiceProgressBar;
+    @FXML
+    private Label progressStatusLabel;
 
     // Database browser
     @FXML private ListView<String> tablesListView;
@@ -218,7 +220,10 @@ public class MainController implements Initializable {
         questionTitleLabel.setText(question.getTitle());
 
         WebEngine webEngine = questionContentWebView.getEngine();
-        webEngine.loadContent(question.getDescription(), "text/html");
+
+        // Convert plain text description to HTML with <pre>
+        String html = "<html><body><pre>" + escapeHtml(question.getDescription()) + "</pre></body></html>";
+        webEngine.loadContent(html);
 
         // Clear previous results
         resultTable.getColumns().clear();
@@ -230,6 +235,14 @@ public class MainController implements Initializable {
         if (question.getExampleSql() != null && !question.getExampleSql().isEmpty()) {
             sqlCodeArea.replaceText(question.getExampleSql());
         }
+    }
+
+    /** Escape HTML special characters */
+    private String escapeHtml(String text) {
+        if (text == null) return "";
+        return text.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
     }
 
     private void loadDatabaseTables() {
@@ -499,6 +512,8 @@ public class MainController implements Initializable {
 
         double progress = totalQuestions > 0 ? (double) completedQuestions / totalQuestions : 0;
         practiceProgressBar.setProgress(progress);
+        String progressText = String.format("Progress: %d/%d completed", completedQuestions, totalQuestions);
+        progressStatusLabel.setText(progressText); // Corrected fx:id
     }
 
     private int countLeafItems(TreeItem<String> item) {
